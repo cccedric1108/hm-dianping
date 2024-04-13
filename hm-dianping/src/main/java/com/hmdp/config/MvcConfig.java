@@ -22,16 +22,16 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(new LoginInterceptor())
                 //排除路径
                 .excludePathPatterns(
-                        "/user/code",
-                        "/blog/hot",
                         "/shop/**",
                         "/voucher/**",
                         "/shop-type/**",
                         "/upload/**",
+                        "/blog/hot",
+                        "/user/code",
                         "/user/login"
                 ).order(1);//优先级大，后执行
        //refresh
         registry.addInterceptor(new RefreshTokenInterceptor(stringRedisTemplate))
-                .excludePathPatterns("/**").order(0);
+                .addPathPatterns("/**").order(0);
     }
 }
