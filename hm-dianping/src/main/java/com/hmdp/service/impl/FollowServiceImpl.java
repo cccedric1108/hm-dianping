@@ -36,6 +36,7 @@ public class FollowServiceImpl extends ServiceImpl<FollowMapper, Follow> impleme
     @Resource
     private IUserService userService;
 
+
     @Override
     public Result follow(Long followUserId, Boolean isFollow) {
         //获取当前用户
@@ -49,7 +50,6 @@ public class FollowServiceImpl extends ServiceImpl<FollowMapper, Follow> impleme
             boolean isSuccess = save(follow);
             if (isSuccess){
                 //放入redis集合
-
                 stringRedisTemplate.opsForSet().add(key, followUserId.toString());
             }
         }else {
